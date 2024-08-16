@@ -5,7 +5,7 @@ import pluginJsonc from 'eslint-plugin-jsonc';
 export default [
   {
     files: ['**/*.ts', '**/*.mjs'],
-    ignores: ['build/**/*'],
+    ignores: ['build/**/*', 'logs/**/*'],
     languageOptions: { parser: parserTs },
     ...stylistic.configs.customize({
       indent: 2,
@@ -16,7 +16,7 @@ export default [
   },
   {
     files: ['**/*.ts', '**/*.mjs'],
-    ignores: ['build/**/*'],
+    ignores: ['build/**/*', 'logs/**/*'],
     plugins: { stylistic },
     rules: {
       'stylistic/array-bracket-newline': ['error', 'consistent'],
