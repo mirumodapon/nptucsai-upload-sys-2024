@@ -23,7 +23,7 @@ class App {
     this.initErrorHandling();
   }
 
-  public listen(port: Port) {
+  public listen(port: Port = 3000) {
     this.app.listen(port, () => {
       logger.info(`ENV: ${this.env}`);
       logger.info(`App listening on the port ${port}...`);

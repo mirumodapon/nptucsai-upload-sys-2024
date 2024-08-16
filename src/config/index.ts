@@ -5,9 +5,9 @@ export const CWD = process.cwd();
 export const { NODE_ENV } = process.env;
 
 config({ path: join(CWD, '.env') });
-config({ path: join(CWD, '.env.local') });
-config({ path: join(CWD, `.env.${NODE_ENV}`) });
-config({ path: join(CWD, `.env.${NODE_ENV}.local`) });
+config({ path: join(CWD, '.env.local'), override: true });
+config({ path: join(CWD, `.env.${NODE_ENV}`), override: true });
+config({ path: join(CWD, `.env.${NODE_ENV}.local`), override: true });
 
 export const { APP_PORT, APP_TIMEZONE } = process.env;
 export const { LOG_DIR } = process.env;
