@@ -26,7 +26,9 @@ export default function UserEducation(sequelize: Sequelize): typeof UserEducatio
         type: DataTypes.ENUM,
         values: ['CBE', 'BBE', 'PBE']
       },
-      grade: { type: DataTypes.TINYINT }
+      grade: {
+        type: DataTypes.TINYINT
+      }
     },
     {
       modelName: 'user_education',

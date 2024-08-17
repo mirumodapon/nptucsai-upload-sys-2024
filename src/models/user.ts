@@ -23,8 +23,7 @@ export default function User(sequelize: Sequelize): typeof UserModel {
       allowNull: false
     },
     email: {
-      type: DataTypes.STRING(50),
-      allowNull: true
+      type: DataTypes.STRING(50)
     },
     permission: {
       type: DataTypes.TINYINT,

@@ -20,7 +20,7 @@ export default [
     plugins: { stylistic },
     rules: {
       'stylistic/array-bracket-newline': ['error', 'consistent'],
-      'stylistic/object-curly-newline': ['error', { multiline: true }],
+      'stylistic/object-curly-newline': ['error', { multiline: true, consistent: true }],
       'stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
       'stylistic/semi-style': ['error', 'last'],
       'stylistic/space-before-function-paren': ['error', 'never']

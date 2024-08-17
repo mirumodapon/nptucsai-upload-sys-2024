@@ -19,10 +19,18 @@ export default function UserInformation(sequelize: Sequelize): typeof UserInform
         primaryKey: true,
         type: DataTypes.STRING(10)
       },
-      id: DataTypes.STRING(10),
-      birthday: DataTypes.DATEONLY,
-      phone: DataTypes.STRING(10),
-      address: DataTypes.STRING(120)
+      id: {
+        type: DataTypes.STRING(10)
+      },
+      birthday: {
+        type: DataTypes.DATEONLY
+      },
+      phone: {
+        type: DataTypes.STRING(10)
+      },
+      address: {
+        type: DataTypes.STRING(120)
+      }
     },
     {
       modelName: 'user_information',
