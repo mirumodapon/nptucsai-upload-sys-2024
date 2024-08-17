@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import cors from '@/middleware/cors';
 import httpLogger from '@/middleware/logger';
+import error from '@/middleware/error';
 
 import { NODE_ENV } from '@/config';
 import type { AppOptions, Port, Routes } from '@/types/app';
@@ -49,6 +50,7 @@ class App {
   }
 
   private initErrorHandling() {
+    this.app.use(error);
   }
 }
 
