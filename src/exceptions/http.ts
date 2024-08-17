@@ -1,16 +1,16 @@
 import logger from '@/utils/logger';
 import type { HttpExceptionOptions } from '@/types/http';
 
-class HttpException extends Error {
+class HttpException {
   public status: number;
   public message: string;
 
   constructor(options: HttpExceptionOptions) {
-    const { error, status, message } = options;
+    const { error } = options;
 
     if (error) {
       logger.error(error);
-      const { status, message } = determine(error);
+      const { status, message } = this.determine(error);
       this.status = status;
       this.message = message;
 
@@ -33,4 +33,4 @@ class HttpException extends Error {
   }
 }
 
-export default HTTPException;
+export default HttpException;
