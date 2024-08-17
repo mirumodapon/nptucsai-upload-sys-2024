@@ -8,5 +8,5 @@
     "source.organizeImports": "never"
   },
 
-  "cSpell.ignoreWords": ["stusys", "uncolorize"]
+  "cSpell.ignoreWords": ["stusys", "uncolorize", "tinyint", "dateonly"]
 }

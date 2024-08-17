@@ -20,3 +20,14 @@ const sequelize = new Sequelize(MYSQL_URL, {
 });
 
 export default sequelize;
+
+import UserModel from '@/models/user';
+import UserEducationModel from '@/models/user_education';
+import UserInformationModel from '@/models/user_information';
+
+export const User = UserModel(sequelize);
+export const UserEducation = UserEducationModel(sequelize);
+export const UserInformation = UserInformationModel(sequelize);
+
+User.hasOne(UserEducation, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+User.hasOne(UserInformation, { foreignKey: 'user_id', onDelete: 'CASCADE' });
