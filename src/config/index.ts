@@ -14,3 +14,5 @@ export const { LOG_DIR } = process.env;
 export const { HTTP_LOG_FORMAT, HTTP_CORS_ORIGIN, HTTP_CORS_CREDENTIALS } = process.env;
 export const { MYSQL_URL } = process.env;
 export const { REDIS_URL } = process.env;
+export const { SESSION_SECRET, SESSION_MAX_AGE } = process.env;
+export const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;

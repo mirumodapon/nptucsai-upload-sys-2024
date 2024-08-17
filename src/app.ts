@@ -6,6 +6,8 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import cors from '@/middleware/cors';
 import httpLogger from '@/middleware/logger';
+import passport from 'passport';
+import session from '@/middleware/session';
 import error from '@/middleware/error';
 
 import { NODE_ENV } from '@/config';
@@ -41,6 +43,9 @@ class App {
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
+    this.app.use(session);
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
     this.app.use(Express.json());
     this.app.use(Express.urlencoded({ extended: true }));
   }
