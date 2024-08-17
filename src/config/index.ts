@@ -13,3 +13,4 @@ export const { APP_PORT, APP_TIMEZONE } = process.env;
 export const { LOG_DIR } = process.env;
 export const { HTTP_LOG_FORMAT, HTTP_CORS_ORIGIN, HTTP_CORS_CREDENTIALS } = process.env;
 export const { MYSQL_URL } = process.env;
+export const { REDIS_URL } = process.env;

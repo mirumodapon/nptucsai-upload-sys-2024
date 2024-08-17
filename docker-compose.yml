@@ -13,6 +13,19 @@ services:
     networks:
       - nptucsai
 
+  radis:
+    container_name: redis
+    image: redis:7.4.0-alpine
+    entrypoint: redis-server /etc/redis/redis.conf
+    environment:
+      REDIS_PASSWORD: QDPmA5lGBshW2hZLvWfk
+    volumes:
+      - ./redis.conf/:/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+    networks:
+      - nptucsai
+
 networks:
   nptucsai:
     driver: bridge
