@@ -23,7 +23,7 @@ export default [
       'stylistic/object-curly-newline': ['error', { multiline: true, consistent: true }],
       'stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
       'stylistic/semi-style': ['error', 'last'],
-      'stylistic/space-before-function-paren': ['error', 'never']
+      'stylistic/space-before-function-paren': ['error', { anonymous: 'always', asyncArrow: 'always', named: 'never' }]
     }
   },
   ...pluginJsonc.configs['flat/base'],
