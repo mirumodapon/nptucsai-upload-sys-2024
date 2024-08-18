@@ -2,7 +2,6 @@ import { Handler } from 'express';
 import { User } from '@/database';
 import passport from 'passport';
 import Google from 'passport-google-oauth20';
-import HTTPException from '@/exceptions/http';
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '@/config';
 
 class AuthController {
@@ -39,11 +38,11 @@ class AuthController {
     if (req.user) return res.redirect('/dashboard');
 
     passport.authenticate('google', (err, user) => {
-      if (err) return next(new HTTPException({ status: 403, message: err }));
+      if (err) return next({ status: 403, message: err });
 
       req.logIn(
         user,
-        err => err ? next(new HTTPException({ status: 403, message: err })) : res.redirect('/dashboard')
+        err => err ? next({ status: 403, message: err }) : res.redirect('/dashboard')
       );
     }).call(this, req, res, next);
   };
@@ -51,7 +50,7 @@ class AuthController {
   logout: Handler = (req, res, next) => {
     req.logout(
       (err) => {
-        if (err) return next(new HTTPException({ error: err }));
+        if (err) return next({ error: err });
 
         req.session.destroy(() => 0);
         res.redirect('/');
@@ -64,7 +63,7 @@ class AuthController {
 
     if (!user) {
       req.session.destroy(() => 0);
-      return next(new HTTPException({ status: 401, message: 'You are not logged in.' }));
+      return next({ status: 401, message: 'You are not logged in.' });
     }
 
     res.send({ ...user });
