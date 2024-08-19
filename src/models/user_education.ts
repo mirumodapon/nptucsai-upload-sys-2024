@@ -1,6 +1,5 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
-import type { UserId } from '@/types/user';
-import type { I_UserEducation, EducationType } from '@/types/user_education';
+import type { UserId, I_UserEducation, EducationType } from '@/types/user';
 
 export class UserEducationModel extends Model implements I_UserEducation {
   public user_id: UserId;
