@@ -29,6 +29,8 @@ class HttpException {
   }
 
   determine(error: Error) {
+    // TODO: Error check for zod and duplicate
+
     return { status: 500, message: 'Internal Server Error.' };
   }
 }
