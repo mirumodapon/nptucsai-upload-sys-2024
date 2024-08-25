@@ -1,4 +1,5 @@
 import logger from '@/utils/logger';
+import { ZodError } from 'zod';
 import type { HttpExceptionOptions } from '@/types/http';
 
 class HttpException {
@@ -28,10 +29,16 @@ class HttpException {
     }
   }
 
-  determine(error: Error) {
-    // TODO: Error check for zod and duplicate
+  determine(error: any) {
+    if (error instanceof ZodError) {
+      return { status: 400, message: 'Data validation failed.' };
+    }
 
-    return { status: 500, message: 'Internal Server Error.' };
+    else if (error.name === 'SequelizeUniqueConstraintError') {
+      return { status: 406, message: 'The resource is existed.' };
+    }
+
+    else return { status: 500, message: 'Internal Server Error.' };
   }
 }
 
