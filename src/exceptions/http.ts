@@ -29,17 +29,30 @@ class HttpException {
     }
   }
 
-  determine(error: any) {
+  determine(error: Error) {
     if (error instanceof ZodError) {
       return { status: 400, message: 'Data validation failed.' };
     }
 
-    else if (error.name === 'SequelizeUniqueConstraintError') {
-      return { status: 406, message: 'The resource is existed.' };
+    else if (error.name.startsWith('Sequelize')) {
+      return this.deterSequelizeError(error);
     }
 
     else return { status: 500, message: 'Internal Server Error.' };
   }
-}
 
+  deterSequelizeError(error: any) { // HACK: There is an any type.
+    console.log(error.parent.code);
+    switch (error?.parent.code) {
+      case 'ER_DUP_ENTRY': return { status: 406, message: 'The resource already exists.' };
+      case 'ER_NO_REFERENCED_ROW_2': return { status: 406, message: 'Not found resource reference.' };
+      default: return { status: 500, message: 'Internal Server Error.' };
+    }
+  }
+}
+//
+// else if (error.name === 'SequelizeUniqueConstraintError') {
+//   return { status: 406, message: 'The resource is existed.' };
+//
+// }
 export default HttpException;
