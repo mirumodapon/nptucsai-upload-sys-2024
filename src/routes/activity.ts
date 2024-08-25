@@ -15,9 +15,6 @@ class ActivityRoute {
     this.router.post('/', this.controller.activityCreate);
     this.router.patch('/', this.controller.activityUpdate);
     this.router.delete('/', this.controller.activityDelete);
-    // TODO: Add record for user
-    // TODO: User checkin
-    // TODO: User Ceckout
   }
 }
 
