@@ -13,8 +13,7 @@ class ActivityRecordRoute {
   initRoutes() {
     this.router.post('/', this.controller.activityRecordCreate);
     this.router.delete('/', this.controller.activityRecordDelete);
-    // TODO: User checkin
-    // TODO: User Ceckout
+    this.router.put('/', this.controller.autoCheck);
   }
 }
 

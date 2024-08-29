@@ -10,6 +10,12 @@ export const S_ActivityRecordUpdate = z.object({
 export const S_ActivityRecordCreate = S_ActivityRecordUpdate;
 export const S_ActivityRecordDelete = S_ActivityRecordUpdate;
 
+export const S_ActivityRecordAutoCheck = z.object({
+  activity: S_ActivityId,
+  token: z.string().length(64)
+});
+
 export type I_ActivityRecordUpdate = z.infer<typeof S_ActivityRecordUpdate>;
 export type I_ActivityRecordCreate = z.infer<typeof S_ActivityRecordCreate>;
 export type I_ActivityRecordDelete = z.infer<typeof S_ActivityRecordDelete>;
+export type I_ActivityRecordRecordAutoCheck = z.infer<typeof S_ActivityRecordAutoCheck>;

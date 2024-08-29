@@ -16,6 +16,7 @@ class AuthRoute {
     this.router.get('/google', this.controller.googleAuth);
     this.router.get('/logout', this.controller.logout);
     this.router.get('/whoami', this.controller.whoami);
+    this.router.get('/qr', this.controller.authQr);
   }
 }
 
