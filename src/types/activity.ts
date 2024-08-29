@@ -1,6 +1,6 @@
 import { UserId } from '@/types/user';
 
-export type ActivityId = number;
+export type ActivityId = string;
 
 export type I_Activity = {
   activity_id: ActivityId;
