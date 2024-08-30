@@ -75,6 +75,8 @@ class AuthController {
   authQr: Handler = async (req, res, next) => {
     // @ts-ignore-next-line WARN: Here is an ts ignore.
     const user_id = req?.user?.user_id;
+    if (!user_id) return next({ status: 401, message: 'You are not logged in.' });
+
     const EX = 2 * 60; // 2 mins
 
     try {
