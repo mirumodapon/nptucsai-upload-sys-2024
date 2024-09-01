@@ -12,5 +12,15 @@ export default {
   plugins: [daisyui],
   daisyui: {
     themes: false
-  }
+  },
+  safelist: [
+    'bg-info',
+    'bg-success',
+    'bg-warning',
+    'bg-error',
+    'text-info-content',
+    'text-success-content',
+    'text-warning-content',
+    'text-error-content'
+  ]
 };
