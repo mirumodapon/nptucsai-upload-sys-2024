@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 function useTheme() {
   const { value, setValue } = useLocalStorage({ key: 'THEME' });
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     if (value === 'light') setValue('dark');
     else if (value === 'dark') setValue(undefined);
     else if (value === undefined) setValue('light');
     else setValue(undefined);
-  };
+  }, [value]);
 
   useEffect(() => {
     document.querySelector('html')!.setAttribute('data-theme', value ?? '');
