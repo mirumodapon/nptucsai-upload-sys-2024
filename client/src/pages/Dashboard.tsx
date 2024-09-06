@@ -26,22 +26,26 @@ function Dashboard() {
         <div className="flex-none">
         </div>
       </header>
-      <div className="flex flex-1 h-full">
+      <div className="flex flex-1 h-[calc(100dvh-64px)]">
         <motion.nav
           animate={nav ? 'open' : 'close'}
           transition={{ duration: 0.2, ease: 'easeOut' }}
           variants={variants}
-          className="bg-base-300 w-[240px] h-full z-30 fixed md:sticky"
+          className={clsx(
+            'bg-base-300 w-[240px] h-full py-3',
+            'z-30 absolute md:sticky flex flex-col',
+            'overflow-x-hidden overflow-y-auto'
+          )}
         >
         </motion.nav>
         <div
           onClick={() => setNav(false)}
           className={clsx(
-            'md:hidden bg-base-300 w-screen fixed h-[calc(100dvh-64px)] z-20 opacity-40',
+            'md:hidden bg-base-300 w-screen absolute h-[calc(100dvh-64px)] z-20 opacity-40',
             { hidden: !nav }
           )}
         />
-        <main className="flex-1">
+        <main className="flex-1 h-full">
           <Outlet />
         </main>
       </div>
