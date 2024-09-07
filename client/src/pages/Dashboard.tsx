@@ -41,7 +41,7 @@ function Dashboard() {
         <div
           onClick={() => setNav(false)}
           className={clsx(
-            'md:hidden bg-base-300 w-screen absolute h-[calc(100dvh-64px)] z-20 opacity-40',
+            'md:hidden bg-neutral-900 w-screen absolute h-[calc(100dvh-64px)] z-20 opacity-40',
             { hidden: !nav }
           )}
         />
