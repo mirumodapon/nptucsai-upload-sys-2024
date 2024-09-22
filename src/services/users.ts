@@ -3,13 +3,56 @@ import sequelize, { User, UserEducation, UserInformation } from '@/database';
 import type { I_UserListFilterWithPagination, I_UserListFilter, I_UserCreate, I_UserDelete, I_UserUpdate } from '@/schemas/users';
 
 class UserService {
-  userList(filter: I_UserListFilterWithPagination) {
-    const { limit, page, ...where } = filter;
-    return User.findAll({ where, limit, offset: limit * page - limit });
+  userList({ limit, page, ...filter }: I_UserListFilterWithPagination) {
+    const generalWhere = ['permission', 'role'].reduce(
+      (prev, curr) => {
+        const value = filter[curr];
+        if (!value) return prev;
+        else return Object.assign(prev, { [curr]: value });
+      },
+      {}
+    );
+
+    const eduWhere = ['graduate', 'type', 'grade'].reduce(
+      (prev, curr) => {
+        const value = filter[curr];
+        if (!value) return prev;
+        else return Object.assign(prev, { [curr]: value });
+      },
+      {}
+    );
+
+    return User.findAll({
+      where: generalWhere,
+      limit,
+      offset: limit * page - limit,
+      include: { model: UserEducation, where: eduWhere, attributes: [] }
+    });
   }
 
   userCount(where: I_UserListFilter) {
-    return User.count({ where });
+    const generalWhere = ['permission', 'role'].reduce(
+      (prev, curr) => {
+        const value = where[curr];
+        if (!value) return prev;
+        else return Object.assign(prev, { [curr]: value });
+      },
+      {}
+    );
+
+    const eduWhere = ['graduate', 'type', 'grade'].reduce(
+      (prev, curr) => {
+        const value = where[curr];
+        if (!value) return prev;
+        else return Object.assign(prev, { [curr]: value });
+      },
+      {}
+    );
+
+    return User.count({
+      where: generalWhere,
+      include: { model: UserEducation, where: eduWhere, attributes: [] }
+    });
   }
 
   userCreate(user: I_UserCreate) {
