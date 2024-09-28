@@ -66,9 +66,7 @@ function Dashboard() {
             { hidden: !nav }
           )}
         />
-        <main className="flex-1 w-full h-full">
-          <Outlet />
-        </main>
+        <Outlet />
       </div>
     </div>
   );
