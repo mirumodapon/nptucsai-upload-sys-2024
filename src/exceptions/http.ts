@@ -30,7 +30,11 @@ class HttpException {
   }
 
   determine(error: Error) {
-    if (error instanceof ZodError) {
+    if (error instanceof HttpException) {
+      return { ...error };
+    }
+
+    else if (error instanceof ZodError) {
       return { status: 400, message: 'Data validation failed.' };
     }
 
@@ -42,7 +46,6 @@ class HttpException {
   }
 
   deterSequelizeError(error: any) { // HACK: There is an any type.
-    console.log(error.parent.code);
     switch (error?.parent.code) {
       case 'ER_DUP_ENTRY': return { status: 406, message: 'The resource already exists.' };
       case 'ER_NO_REFERENCED_ROW_2': return { status: 406, message: 'Not found resource reference.' };

@@ -1,6 +1,7 @@
 import { Handler } from 'express';
 import UserService from '@/services/users';
 import { S_UserListFilterWithPagination, S_UserListFilter, S_UserCreate, S_UserDelete, S_UserUpdate } from '@/schemas/users';
+import HttpException from '@/exceptions/http';
 
 class UserController {
   userService = new UserService();
@@ -71,7 +72,7 @@ class UserController {
       const user = S_UserUpdate.parse(body);
       const effect = await this.userService.userUpdate(user);
 
-      if (!effect) throw new Error('Update user failed.');
+      if (!effect) throw new HttpException({ message: 'User not founded', status: 404 });
       else res.send({ message: `Update ${effect} user(s) successfully.` });
     }
     catch (error) {

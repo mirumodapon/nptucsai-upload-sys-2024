@@ -1,5 +1,5 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
-import type { I_User, UserId, UserRole } from '@/types/user';
+import type { I_User, UserId, UserRole, EducationType } from '@/types/user';
 
 export class UserModel extends Model implements I_User {
   public user_id: UserId;
@@ -7,6 +7,9 @@ export class UserModel extends Model implements I_User {
   public email: string;
   public permission: number;
   public role: UserRole;
+  public graduate: boolean;
+  public type: EducationType;
+  public grade: number;
 
   public createdAt: Date;
   public updatedAt: Date;
@@ -33,6 +36,17 @@ export default function User(sequelize: Sequelize): typeof UserModel {
       type: DataTypes.ENUM,
       values: ['STAFF', 'STUDENT', 'TEACHER'],
       defaultValue: 'STUDENT'
+    },
+    graduate: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    type: {
+      type: DataTypes.ENUM,
+      values: ['CBE', 'BBE', 'PBE']
+    },
+    grade: {
+      type: DataTypes.TINYINT
     }
   },
   {

@@ -18,10 +18,6 @@ export type I_User = {
   email: string;
   permission: number;
   role: UserRole;
-};
-
-export type I_UserEducation = {
-  user_id: UserId;
   graduate: boolean;
   type: EducationType;
   grade: number;

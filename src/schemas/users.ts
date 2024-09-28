@@ -43,12 +43,11 @@ export const S_UserCreate = S_User
     graduate: S_Graduate.default(false)
   }))
   .transform((val) => {
-    const { id, birthday, phone, address, grade, graduate, type, ...user } = val;
+    const { id, birthday, phone, address, ...user } = val;
 
     return {
       ...user,
-      user_information: { id, birthday, phone, address },
-      user_education: { grade, graduate, type }
+      user_information: { id, birthday, phone, address }
     };
   });
 
@@ -58,12 +57,11 @@ export const S_UserUpdate = S_User
   .partial()
   .merge(z.object({ user_id: z.array(S_UserId) }))
   .transform((val) => {
-    const { id, birthday, phone, address, grade, graduate, type, ...user } = val;
+    const { id, birthday, phone, address, ...user } = val;
 
     return {
       ...user,
-      user_information: { id, birthday, phone, address },
-      user_education: { grade, graduate, type }
+      user_information: { id, birthday, phone, address }
     };
   });
 
