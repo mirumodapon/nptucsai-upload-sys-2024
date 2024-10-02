@@ -13,6 +13,7 @@ export default {
   daisyui: {
     themes: false
   },
+  darkMode: ['class', '[data-theme="dark"]'],
   safelist: [
     'bg-info',
     'bg-success',
