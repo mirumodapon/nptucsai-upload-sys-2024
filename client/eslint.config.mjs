@@ -31,7 +31,7 @@ export default tseslint.config(
       'stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
       'stylistic/semi-style': ['error', 'last'],
       'stylistic/space-before-function-paren': ['error', { anonymous: 'always', asyncArrow: 'always', named: 'never' }],
-      'stylistic/jsx-one-expression-per-line': ['error', { allow: 'literal' }]
+      'stylistic/jsx-one-expression-per-line': ['error', { allow: 'non-jsx' }]
     }
   },
   ...pluginJsonc.configs['flat/base'],
