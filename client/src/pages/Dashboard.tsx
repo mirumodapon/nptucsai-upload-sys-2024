@@ -33,7 +33,7 @@ function Dashboard() {
           transition={{ duration: 0.2, ease: 'easeOut' }}
           variants={variants}
           className={clsx(
-            'bg-base-300 w-[240px] h-full py-3',
+            'bg-base-300 w-[240px] h-[calc(100dvh-64px)] py-3',
             'z-30 absolute md:sticky flex flex-col',
             'overflow-x-hidden overflow-y-auto'
           )}
