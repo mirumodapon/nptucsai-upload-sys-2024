@@ -20,3 +20,14 @@ const sequelize = new Sequelize(MYSQL_URL, {
 });
 
 export default sequelize;
+
+import GroupModel from '@/models/group';
+import UserModel from '@/models/user';
+import FileModel from '@/models/file';
+
+export const Group = GroupModel(sequelize);
+export const User = UserModel(sequelize);
+export const File = FileModel(sequelize);
+
+Group.hasMany(User, { foreignKey: 'group_id' });
+Group.hasMany(File, { foreignKey: 'group_id' });
