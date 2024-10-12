@@ -8,7 +8,7 @@ export default session({
   resave: true,
   rolling: true,
   saveUninitialized: false,
-  store: new redisStore({ client, prefix: 'SESSION:' }),
+  store: new redisStore({ client, prefix: 'UPLOAD:SESSION:' }),
   cookie: {
     maxAge: parseInt(SESSION_MAX_AGE) ?? 24 * 60 * 60 * 1000,
     httpOnly: true,

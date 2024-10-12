@@ -29,5 +29,6 @@ export const Group = GroupModel(sequelize);
 export const User = UserModel(sequelize);
 export const File = FileModel(sequelize);
 
+User.hasOne(Group, { foreignKey: 'group_id', sourceKey: 'group_id' });
 Group.hasMany(User, { foreignKey: 'group_id' });
 Group.hasMany(File, { foreignKey: 'group_id' });
