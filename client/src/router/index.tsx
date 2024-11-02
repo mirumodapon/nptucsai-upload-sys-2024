@@ -6,6 +6,9 @@ import Dashboard from '@/pages/Dashboard';
 import LazyComponent from '@/components/features/LazyComponent';
 
 const SysInfo = lazy(() => import('@/pages/SysInfo'));
+const GroupPage = lazy(() => import('@/pages/GroupPage'));
+const CreateGroupPage = lazy(() => import('@/pages/CreateGroupPage'));
+const UserPage = lazy(() => import('@/pages/UserPage'));
 
 export default createBrowserRouter([
   {
@@ -23,6 +26,31 @@ export default createBrowserRouter([
             <SysInfo />
           </LazyComponent>
         )
+      },
+      {
+        path: 'users',
+        element: (
+          <LazyComponent>
+            <UserPage />
+          </LazyComponent>
+        )
+      },
+      {
+        path: 'groups',
+        element: (
+          <LazyComponent>
+            <GroupPage />
+          </LazyComponent>
+        )
+      },
+      {
+        path: 'new-group',
+        element: (
+          <LazyComponent>
+            <CreateGroupPage />
+          </LazyComponent>
+        )
+
       }
     ]
   }

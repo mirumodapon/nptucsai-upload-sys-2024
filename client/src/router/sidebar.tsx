@@ -1,5 +1,6 @@
 import { ElementType } from 'react';
-import { MdInfoOutline } from 'react-icons/md';
+import { MdInfoOutline, MdGroups } from 'react-icons/md';
+import { BsPersonFill } from 'react-icons/bs';
 
 export type SidbarItem = {
   label: string;
@@ -9,6 +10,16 @@ export type SidbarItem = {
 };
 
 const sidebar: SidbarItem[] = [
+  {
+    label: '用戶管理',
+    path: '/dashboard/users',
+    Before: BsPersonFill
+  },
+  {
+    label: '群組管理',
+    path: '/dashboard/groups',
+    Before: MdGroups
+  },
   {
     label: '關於系統',
     path: '/dashboard/sys',
