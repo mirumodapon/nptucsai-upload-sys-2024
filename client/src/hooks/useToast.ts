@@ -28,7 +28,7 @@ const useToast = create<UseToast>((set) => {
   const exitToast = (key: string) => {
     set((state) => {
       const toast = Object.assign({}, state.toast);
-      toast[key].exit = true;
+      if (key in toast) toast[key].exit = true;
       return { toast };
     });
 
