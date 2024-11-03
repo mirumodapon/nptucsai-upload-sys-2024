@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import useGroup from '@/service/useGroup';
+import { useGroup } from '@/service/useGroup';
 
 function GroupPage() {
   const { data } = useGroup();

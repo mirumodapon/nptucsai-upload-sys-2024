@@ -9,7 +9,10 @@ class GroupService {
       const group = await Group.create({ name: payload.name }, { transaction });
       const users = await User.bulkCreate(
         payload.users.map(u => Object.assign(u, { group_id: group.group_id })),
-        { transaction }
+        {
+          transaction,
+          updateOnDuplicate: ['username', 'group_id']
+        }
       );
 
       await transaction.commit();
