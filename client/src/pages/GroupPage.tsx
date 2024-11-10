@@ -30,12 +30,12 @@ function GroupPage() {
                 }
                 {
                   group.files.poster
-                    ? <td>{group.files?.book.filename}</td>
+                    ? <td>{group.files?.poster.filename}</td>
                     : <td className="text-red-500">未上傳</td>
                 }
                 {
                   group.files.ppt
-                    ? <td>{group.files?.book.filename}</td>
+                    ? <td>{group.files?.ppt.filename}</td>
                     : <td className="text-red-500">未上傳</td>
                 }
               </tr>

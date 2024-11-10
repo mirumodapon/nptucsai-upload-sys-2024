@@ -1,7 +1,7 @@
 import { Handler } from 'express';
 import { fileTypeFromFile } from 'file-type';
 import FileService from '@/services/file';
-import { unlinkSync } from 'node:fs';
+import { unlinkSync, existsSync } from 'node:fs';
 
 class FileController {
   service = new FileService();
@@ -45,7 +45,9 @@ class FileController {
       next({ error });
     }
     finally {
-      unlinkSync(path);
+      if (path && existsSync(path)) {
+        unlinkSync(path);
+      }
     }
   };
 

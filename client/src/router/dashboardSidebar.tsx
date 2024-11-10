@@ -22,7 +22,7 @@ const sidebar: SidbarItem[] = [
   },
   {
     label: '展示簡報或影片上傳',
-    path: '/dashboard/ppt',
+    path: '/dashboard/demo',
     Before: RiSlideshow2Line
   },
   {

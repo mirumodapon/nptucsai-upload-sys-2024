@@ -12,6 +12,8 @@ const CreateGroupPage = lazy(() => import('@/pages/CreateGroupPage'));
 const UserPage = lazy(() => import('@/pages/UserPage'));
 const FileUpload = lazy(() => import('@/pages/FileUpload'));
 const PosterPage = lazy(() => import('@/pages/PosterPage'));
+const BookPage = lazy(() => import('@/pages/BookPage'));
+const DemoPage = lazy(() => import('@/pages/DemoPage'));
 
 export default createBrowserRouter([
   {
@@ -31,6 +33,22 @@ export default createBrowserRouter([
         element: (
           <LazyComponent>
             <PosterPage />
+          </LazyComponent>
+        )
+      },
+      {
+        path: 'book',
+        element: (
+          <LazyComponent>
+            <BookPage />
+          </LazyComponent>
+        )
+      },
+      {
+        path: 'demo',
+        element: (
+          <LazyComponent>
+            <DemoPage />
           </LazyComponent>
         )
       }
