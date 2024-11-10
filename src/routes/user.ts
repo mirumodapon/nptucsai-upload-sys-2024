@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import UserController from '@/controllers/user';
-import auth from '@/middleware/auth';
+import { adminonly } from '@/middleware/auth';
 
 class UserRoute {
   public path = '/api/users';
@@ -13,7 +13,7 @@ class UserRoute {
   }
 
   private initMiddleware() {
-    this.router.use(auth);
+    this.router.use(adminonly);
   }
 
   private initRoute() {

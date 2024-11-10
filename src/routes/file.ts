@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import FileController from '@/controllers/file';
 import uploadFileMiddleware from '@/middleware/uploadFile';
+import { auth } from '@/middleware/auth';
 
 class FileRoute {
   public path = '/api/files';
@@ -13,6 +14,7 @@ class FileRoute {
   }
 
   initMiddleware() {
+    this.router.use(auth);
     this.router.use(uploadFileMiddleware.single('file'));
   }
 

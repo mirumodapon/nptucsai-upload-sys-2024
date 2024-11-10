@@ -1,28 +1,38 @@
 import { Handler } from 'express';
-import { copyFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { fileTypeFromFile } from 'file-type';
+import FileService from '@/services/file';
 
 class FileController {
+  service = new FileService();
+
   acceptType = {
-    book: [],
-    poster: [],
-    ppt: []
+    book: ['application/pdf'],
+    poster: ['application/pdf'],
+    ppt: ['application/pdf']
   };
 
   uploadFile: Handler = async (req, res, next) => {
     try {
       if (!req.file) return res.status(400).send('Bad Request.');
-      const { path } = req.file;
+      const { path, filename } = req.file;
       const { category } = req.params;
 
-      const filetype = ''; // TODO: determind if this file is allowed
+      const filetype = await fileTypeFromFile(path);
       const acceptType = this.acceptType[category];
 
-      if (!acceptType) return res.status(400).send('Bad REquest');
-      if (!acceptType.includes(filetype)) return res.status(400).send('Bad REquest');
+      if (!acceptType) return res.status(400).send('Bad Request');
+      if (!acceptType.includes(filetype.mime)) return res.status(400).send('Bad Request');
 
-      copyFileSync(path, join(process.cwd(), 'uploads'));
-      res.status(200).send('ok.');
+      // @ts-ignore-next-line
+      const group_id = req.group_id;
+      const result = await this.service.uploadFile({
+        target: path,
+        filename,
+        type: category,
+        group_id: 0 // TODO: group_id
+      });
+
+      res.status(200).send(result);
     }
     catch (error) {
       next({ error });

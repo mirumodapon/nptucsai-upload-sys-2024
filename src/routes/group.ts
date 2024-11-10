@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import GroupController from '@/controllers/group';
-import auth from '@/middleware/auth';
+import { adminonly } from '@/middleware/auth';
 
 class GroupRoute {
   public path = '/api/groups';
@@ -13,7 +13,7 @@ class GroupRoute {
   }
 
   private initMiddleware() {
-    this.router.use(auth);
+    this.router.use(adminonly);
   }
 
   private initRoute() {
