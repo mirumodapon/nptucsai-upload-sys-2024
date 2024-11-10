@@ -1,4 +1,4 @@
-import sequelize, { File, Group } from '@/database';
+import sequelize, { File, User } from '@/database';
 import { copyFileSync } from 'node:fs';
 import { join, parse as parseFile } from 'node:path';
 
@@ -21,6 +21,14 @@ class FileService {
       group_id,
       create_by,
       type
+    });
+  }
+
+  listFile(group_id: number, type: string) {
+    return File.findAll({
+      where: { group_id, type },
+      include: [User],
+      order: [['created_at', 'DESC']]
     });
   }
 }

@@ -4,12 +4,14 @@ import { createBrowserRouter } from 'react-router-dom';
 import Test from '@/pages/Test';
 import Admin from '@/pages/Admin';
 import LazyComponent from '@/components/features/LazyComponent';
+import Dashboard from '@/pages/Dashboard';
 
 const SysInfo = lazy(() => import('@/pages/SysInfo'));
 const GroupPage = lazy(() => import('@/pages/GroupPage'));
 const CreateGroupPage = lazy(() => import('@/pages/CreateGroupPage'));
 const UserPage = lazy(() => import('@/pages/UserPage'));
 const FileUpload = lazy(() => import('@/pages/FileUpload'));
+const PosterPage = lazy(() => import('@/pages/PosterPage'));
 
 export default createBrowserRouter([
   {
@@ -19,6 +21,20 @@ export default createBrowserRouter([
   {
     path: 'files',
     element: <FileUpload />
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
+    children: [
+      {
+        path: 'poster',
+        element: (
+          <LazyComponent>
+            <PosterPage />
+          </LazyComponent>
+        )
+      }
+    ]
   },
   {
     path: '/admin',

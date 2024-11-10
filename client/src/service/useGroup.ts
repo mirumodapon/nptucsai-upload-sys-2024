@@ -3,9 +3,14 @@ import ky from 'ky';
 
 import type { I_User } from './useUser';
 
+type I_File = {
+  filename: string;
+};
+
 export type I_Group = {
   group_id: string;
   name: string;
+  files: Record<string, I_File>;
 };
 
 export type I_CreateGroup = {

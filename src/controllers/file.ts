@@ -14,6 +14,7 @@ class FileController {
   uploadFile: Handler = async (req, res, next) => {
     try {
       if (!req.file) return res.status(400).send('Bad Request.');
+      req.file.originalname = Buffer.from(req.file.originalname, 'latin1').toString('utf8');
       const { path, originalname } = req.file;
       const { category } = req.params;
 
@@ -44,8 +45,10 @@ class FileController {
 
   listFiles: Handler = async (req, res, next) => {
     try {
-      const result = await this.service.listFiles();
-      console.log(result);
+      // @ts-ignore-next-line
+      const group_id = req.group_id;
+      const type = req.params.type;
+      const result = await this.service.listFile(group_id, type);
       res.send(result);
     }
     catch (error) {

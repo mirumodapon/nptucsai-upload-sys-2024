@@ -21,7 +21,7 @@ class FileRoute {
       auth, uploadFileMiddleware.single('file')
     ], this.controller.uploadFile);
 
-    this.router.get('/', this.controller.listFiles);
+    this.router.get('/:type', [auth], this.controller.listFiles);
   }
 }
 

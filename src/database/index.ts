@@ -32,4 +32,4 @@ export const File = FileModel(sequelize);
 User.hasOne(Group, { foreignKey: 'group_id', sourceKey: 'group_id' });
 Group.hasMany(User, { foreignKey: 'group_id' });
 Group.hasMany(File, { foreignKey: 'group_id' });
-File.hasOne(User, { foreignKey: 'create_by' });
+File.hasOne(User, { foreignKey: 'user_id', sourceKey: 'create_by' });
