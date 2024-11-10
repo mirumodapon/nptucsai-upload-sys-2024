@@ -7,17 +7,19 @@ type I_UploadFile = {
   filename: string;
   target: string;
   type: string;
+  create_by: string;
 };
 
 class FileService {
   async uploadFile(payload: I_UploadFile) {
-    const { group_id, filename, target, type } = payload;
+    const { group_id, filename, target, type, create_by } = payload;
 
     copyFileSync(target, join(process.cwd(), 'uploads'));
     return File.create({
       file_id: parseFile(target).base,
       filename,
       group_id,
+      create_by,
       type
     });
   }

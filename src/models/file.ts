@@ -6,6 +6,7 @@ type I_File = {
   group_id: string;
   filename: string;
   type: string;
+  create_by: string;
 };
 
 class FileModel extends Model implements I_File {
@@ -13,6 +14,7 @@ class FileModel extends Model implements I_File {
   public group_id: string;
   public filename: string;
   public type: string;
+  public create_by: string;
 
   public createdAt: Date;
   public updatedAt: Date;
@@ -35,6 +37,10 @@ export default function (sequelize: Sequelize): typeof FileModel {
       },
       type: {
         type: DataTypes.STRING(20)
+      },
+      create_by: {
+        allowNull: false,
+        type: DataTypes.STRING(10)
       }
     },
     {

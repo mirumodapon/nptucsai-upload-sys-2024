@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PiHamburger } from 'react-icons/pi';
 import clsx from 'clsx';
 import useToggle from '@/hooks/useToggle';
-import sidebar from '@/router/sidebar';
+import sidebar from '@/router/adminSidebar';
 
 const variants = {
   open: { width: '240px' },
