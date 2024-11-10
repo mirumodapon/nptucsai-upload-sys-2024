@@ -41,6 +41,17 @@ class FileController {
       next({ error });
     }
   };
+
+  listFiles: Handler = async (req, res, next) => {
+    try {
+      const result = await this.service.listFiles();
+      console.log(result);
+      res.send(result);
+    }
+    catch (error) {
+      next({ error });
+    }
+  };
 }
 
 export default FileController;

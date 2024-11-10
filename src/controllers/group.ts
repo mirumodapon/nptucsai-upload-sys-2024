@@ -34,6 +34,22 @@ class GroupController {
       next({ error });
     }
   };
+
+  /**
+   * Get special group information
+   */
+  getGroup: Handler = async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const result = await this.groupService.getGroup(id);
+
+      if (!result) return res.status(404).send('Not Found.');
+      res.send(result);
+    }
+    catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default GroupController;

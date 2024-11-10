@@ -1,4 +1,4 @@
-import { File } from '@/database';
+import sequelize, { File, Group } from '@/database';
 import { copyFileSync } from 'node:fs';
 import { join, parse as parseFile } from 'node:path';
 

@@ -49,6 +49,7 @@ class AuthController {
   };
 
   googleAuth: Handler = (req, res, next) => {
+    console.log(req.user.GroupModel.group_id);
     // @ts-ignore-next-line
     if (req.user) return res.redirect(req.user.GroupModel.group_id === 1 ? '/admin' : '/dashboard');
 

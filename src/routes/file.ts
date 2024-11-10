@@ -14,12 +14,14 @@ class FileRoute {
   }
 
   initMiddleware() {
-    this.router.use(auth);
-    this.router.use(uploadFileMiddleware.single('file'));
   }
 
   initRoutes() {
-    this.router.post('/:category', [], this.controller.uploadFile);
+    this.router.post('/:category', [
+      auth, uploadFileMiddleware.single('file')
+    ], this.controller.uploadFile);
+
+    this.router.get('/', this.controller.listFiles);
   }
 }
 
