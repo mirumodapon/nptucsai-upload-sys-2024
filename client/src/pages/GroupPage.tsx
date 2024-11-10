@@ -6,7 +6,7 @@ function GroupPage() {
 
   return (
     <div className="p-5">
-      <Link to="/dashboard/new-group" className="p-3 btn btn-warning text-warning-content">新增群組</Link>
+      <Link to="/admin/new-group" className="p-3 btn btn-warning text-warning-content">新增群組</Link>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
