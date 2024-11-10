@@ -1,12 +1,52 @@
+import { useRef, BaseSyntheticEvent } from 'react';
+import useToast from '@/hooks/useToast';
+import { useQueryClient } from '@tanstack/react-query';
 import useFile from '@/service/useFile';
+import ky from 'ky';
 
 function PosterPage() {
   const { data } = useFile({ type: 'book' });
+  const fileInput = useRef<HTMLInputElement>(null);
+  const toast = useToast();
+  const query = useQueryClient();
+
+  const handleUploadFile = async (e: BaseSyntheticEvent) => {
+    e.preventDefault();
+    const [file] = fileInput.current?.files ?? [];
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      await ky.post('/api/files/book', {
+        body: formData
+      });
+
+      toast.addToast({
+        key: `UPLOAD_FILE_SUCCESS${Date.now()}`,
+        type: 'success',
+        message: '上傳成功',
+        during: 3000
+      });
+
+      query.invalidateQueries({ queryKey: ['file', 'book'], refetchType: 'all' });
+    }
+    catch (error) {
+      // @ts-expect-error no idea
+      const { message } = await error.response.json();
+      toast.addToast({
+        key: `UPLOAD_FILE_FAILED${Date.now()}`,
+        type: 'error',
+        message: message ?? '上傳失敗',
+        during: 3000
+      });
+    }
+  };
 
   return (
     <div className="w-full p-5">
-      <form className="p-3 mb-8" encType="multipart/form-data" method="post" action="/api/files/book">
-        <input name="file" type="file" className="file-input file-input-bordered file-input-info w-full max-w-xs" />
+      <form className="p-3 mb-8" onSubmit={handleUploadFile}>
+        <input ref={fileInput} type="file" className="file-input file-input-bordered file-input-info w-full max-w-xs" />
         <button className="btn">送出</button>
       </form>
       <div className="divider divider-start divider-default">上傳紀錄</div>

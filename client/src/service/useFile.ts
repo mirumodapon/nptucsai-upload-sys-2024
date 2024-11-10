@@ -17,7 +17,7 @@ type I_File = {
 
 export default function useFile({ type }: Props) {
   return useQuery<I_File[]>({
-    queryKey: ['file', { type }],
+    queryKey: ['file', type],
     queryFn: () => ky(`/api/files/${type}`).json(),
     placeholderData: []
   });

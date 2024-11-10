@@ -7,3 +7,8 @@ build/
 logs/
 .data/
 
+temp/
+!.temp/.gitkeep
+
+uploads/
+!.uploads/.gitkeep
