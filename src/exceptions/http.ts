@@ -1,6 +1,7 @@
 import logger from '@/utils/logger';
 import { ZodError } from 'zod';
 import type { HttpExceptionOptions } from '@/types/http';
+import { MulterError } from 'multer';
 
 class HttpException {
   public status: number;
@@ -36,6 +37,10 @@ class HttpException {
 
     else if (error instanceof ZodError) {
       return { status: 400, message: 'Data validation failed.' };
+    }
+
+    else if (error instanceof MulterError) {
+      return { status: 400, message: error.message };
     }
 
     else if (error.name.startsWith('Sequelize')) {

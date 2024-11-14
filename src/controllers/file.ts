@@ -9,7 +9,7 @@ class FileController {
   acceptType = {
     book: ['application/pdf'],
     poster: ['application/pdf'],
-    ppt: ['application/pdf']
+    ppt: ['application/pdf', 'application/x-cfb']
   };
 
   uploadFile: Handler = async (req, res, next) => {
@@ -23,6 +23,8 @@ class FileController {
 
       const filetype = await fileTypeFromFile(path);
       const acceptType = this.acceptType[category];
+
+      console.log(filetype);
 
       if (!acceptType) return res.status(400).send({ message: 'Bad Request' });
       if (!acceptType.includes(filetype.mime)) return res.status(400).send({ message: '檔案類型不支援' });

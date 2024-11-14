@@ -49,16 +49,14 @@ class AuthController {
   };
 
   googleAuth: Handler = (req, res, next) => {
-    console.log(req.user.GroupModel.group_id);
-    // @ts-ignore-next-line
-    if (req.user) return res.redirect(req.user.GroupModel.group_id === 1 ? '/admin' : '/dashboard');
-
     passport.authenticate('google', (err, user) => {
       if (err) return next({ status: 403, message: err });
 
       req.logIn(
         user,
-        err => err ? next({ status: 403, message: err }) : res.redirect('/dashboard')
+        err => err
+          ? next({ status: 403, message: err })
+          : res.redirect(user.GroupModel?.group_id === 1 ? '/admin' : '/dashboard')
       );
     }).call(this, req, res, next);
   };

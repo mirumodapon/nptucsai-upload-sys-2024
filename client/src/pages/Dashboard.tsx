@@ -1,6 +1,7 @@
 import { Outlet, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PiHamburger } from 'react-icons/pi';
+import { BiLogOut } from 'react-icons/bi';
 import clsx from 'clsx';
 import useToggle from '@/hooks/useToggle';
 import sidebar from '@/router/dashboardSidebar';
@@ -25,6 +26,9 @@ function Dashboard() {
           <Link to="/dashboard" className="btn btn-primary shadow-none text-xl">StuSys</Link>
         </div>
         <div className="flex-none">
+          <a href="/api/auth/logout" className="btn btn-square btn-primary shadow-none">
+            <BiLogOut className="text-2xl" />
+          </a>
         </div>
       </header>
       <div className="flex flex-1 h-[calc(100dvh-64px)]">

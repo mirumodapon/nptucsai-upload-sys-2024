@@ -18,7 +18,7 @@ class FileRoute {
 
   initRoutes() {
     this.router.post('/:category', [
-      auth, uploadFileMiddleware.single('file')
+      auth, uploadFileMiddleware
     ], this.controller.uploadFile);
 
     this.router.get('/:type', [auth], this.controller.listFiles);
