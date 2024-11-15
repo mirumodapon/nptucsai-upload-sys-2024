@@ -4,6 +4,8 @@ import { PiHamburger } from 'react-icons/pi';
 import clsx from 'clsx';
 import useToggle from '@/hooks/useToggle';
 import sidebar from '@/router/adminSidebar';
+import useWindowSize from '@/hooks/useWindowSize';
+import { useCallback, useEffect } from 'react';
 
 const variants = {
   open: { width: '240px' },
@@ -11,7 +13,17 @@ const variants = {
 };
 
 function Dashboard() {
-  const [nav, toggleNav, setNav] = useToggle(true);
+  const { width } = useWindowSize();
+  const [nav, toggleNav, setNav] = useToggle(false);
+
+  useEffect(() => {
+    if (width && width >= 768) setNav(true);
+  }, [width]);
+
+  const onLinkClick = useCallback(() => {
+    if (!width) return () => 0;
+    else if (width < 786) setNav(false);
+  }, [width]);
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -37,11 +49,13 @@ function Dashboard() {
             'z-30 absolute md:sticky flex flex-col',
             'overflow-x-hidden overflow-y-auto'
           )}
+          onClick={onLinkClick}
         >
           {
             sidebar.map(({ label, path, Before, After }) => (
               <Link
                 key={path}
+                onClick={() => {}}
                 className={clsx(
                   'btn btn-ghost justify-start mx-3',
                   'gap-x-3 flex-nowrap whitespace-nowrap',

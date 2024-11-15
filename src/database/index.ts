@@ -24,10 +24,12 @@ export default sequelize;
 import GroupModel from '@/models/group';
 import UserModel from '@/models/user';
 import FileModel from '@/models/file';
+import ParamModel from '@/models/param';
 
 export const Group = GroupModel(sequelize);
 export const User = UserModel(sequelize);
 export const File = FileModel(sequelize);
+export const Param = ParamModel(sequelize);
 
 User.hasOne(Group, { foreignKey: 'group_id', sourceKey: 'group_id' });
 Group.hasMany(User, { foreignKey: 'group_id' });

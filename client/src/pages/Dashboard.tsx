@@ -5,14 +5,41 @@ import { BiLogOut } from 'react-icons/bi';
 import clsx from 'clsx';
 import useToggle from '@/hooks/useToggle';
 import sidebar from '@/router/dashboardSidebar';
+import useWindowSize from '@/hooks/useWindowSize';
+import { useEffect } from 'react';
 
 const variants = {
   open: { width: '240px' },
   close: { width: 0 }
 };
 
-function Dashboard() {
-  const [nav, toggleNav, setNav] = useToggle(true);
+type Props = {
+  admin?: boolean;
+};
+
+function Dashboard({ admin }: Props) {
+  const { width } = useWindowSize();
+  const [nav, toggleNav, setNav] = useToggle();
+
+  useEffect(() => {
+    if (width && width >= 768) setNav(true);
+  }, [width]);
+
+  useEffect(() => {
+    fetch('/api/auth/whoami')
+      .then(response => response.json())
+      .then((data) => {
+        const name = data.GroupModel?.name;
+        if (name) {
+          if (admin && name !== 'ADMIN') {
+            window.location.href = '/api/auth/google';
+          }
+        }
+        else {
+          window.location.href = '/api/auth/google';
+        }
+      });
+  }, []);
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -37,7 +64,7 @@ function Dashboard() {
           transition={{ duration: 0.2, ease: 'easeOut' }}
           variants={variants}
           className={clsx(
-            'bg-base-300 w-[240px] h-[calc(100dvh-64px)] py-3',
+            'bg-base-300 w-0 h-[calc(100dvh-64px)] py-3',
             'z-30 absolute md:sticky flex flex-col',
             'overflow-x-hidden overflow-y-auto'
           )}

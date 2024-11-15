@@ -6,7 +6,7 @@
   "type": "module",
   "packageManager": "pnpm@9.7.0",
   "scripts": {
-    "start": "node build/src/index",
+    "start": "NODE_ENV=production node ./build/src/index.js",
     "dev": "nodemon",
     "build": "swc src -d build",
     "lint": "eslint"

@@ -13,7 +13,7 @@
     "target": "es2020",
     "minify": {
       "compress": true,
-      "mangle": true
+      "mangle": false
     },
     "baseUrl": "src",
     "paths": {
@@ -21,6 +21,8 @@
     }
   },
   "module": {
-    "type": "commonjs"
+    "type": "es6",
+    "noInterop": true,
+    "resolveFully": true
   }
 }

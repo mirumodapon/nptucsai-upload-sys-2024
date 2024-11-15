@@ -7,9 +7,9 @@ class FileController {
   service = new FileService();
 
   acceptType = {
-    book: ['application/pdf'],
-    poster: ['application/pdf'],
-    ppt: ['application/pdf', 'application/x-cfb']
+    book: ['application/pdf', 'application/x-cfb'],
+    poster: ['application/x-cfb', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'],
+    ppt: ['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/x-cfb', 'Video/ogg', 'Video/mpeg', 'Video/mp4']
   };
 
   uploadFile: Handler = async (req, res, next) => {
