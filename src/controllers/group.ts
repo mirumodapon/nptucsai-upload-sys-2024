@@ -1,6 +1,8 @@
 import { Handler } from 'express';
 import GroupService from '@/services/group';
 import { CreateGroupSchema } from '@/schemas/group';
+import archiver from 'archiver';
+import { join } from 'node:path';
 
 class GroupController {
   private groupService = new GroupService();
@@ -48,6 +50,29 @@ class GroupController {
     }
     catch (error) {
       next(error);
+    }
+  };
+
+  downloadFiles: Handler = async (req, res, next) => {
+    try {
+      const groups = await this.groupService.listGroup();
+      const archive = archiver('zip', { zlib: { level: 9 } });
+
+      for (const group of groups) {
+        archive.directory('subdir/', group.name);
+
+        for (const file of Object.values(group.files)) {
+          const path = join(process.cwd(), 'uploads', file.file_id);
+          archive.file(path, { name: join(group.name, file.filename) });
+        }
+      }
+
+      res.attachment('output.zip');
+      archive.pipe(res);
+      archive.finalize();
+    }
+    catch (error) {
+      next({ error });
     }
   };
 }

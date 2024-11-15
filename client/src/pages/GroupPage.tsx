@@ -7,6 +7,7 @@ function GroupPage() {
   return (
     <div className="w-full overflow-x-auto p-5">
       <Link to="/admin/new-group" className="p-3 btn btn-warning text-warning-content">新增群組</Link>
+      <a className="mx-2 btn btn-info" href="/api/groups/files" download="專題">下載檔案</a>
       <div className="overflow-x-auto whitespace-nowrap">
         <table className="table">
           <thead>

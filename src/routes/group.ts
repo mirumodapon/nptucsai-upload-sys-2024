@@ -19,6 +19,7 @@ class GroupRoute {
   private initRoute() {
     this.router.post('/', [], this.controller.createGroup);
     this.router.get('/', [], this.controller.listGroup);
+    this.router.get('/files', [], this.controller.downloadFiles);
   }
 };
 
