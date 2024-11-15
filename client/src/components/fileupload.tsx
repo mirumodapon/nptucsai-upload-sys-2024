@@ -6,8 +6,19 @@ import useFile from '@/service/useFile';
 type Props = {
 
   type: string;
-  hint?: string;
+  hint?: string | null;
 };
+
+function safeJsonParse(x: string) {
+  let result;
+  try {
+    result = JSON.parse(x);
+  }
+  catch {
+    // OK
+  }
+  return result;
+}
 
 function FileUpload({ type, hint }: Props) {
   const { data } = useFile({ type });
@@ -41,10 +52,11 @@ function FileUpload({ type, hint }: Props) {
       }
 
       if (xhr.readyState === 4) {
+        abort();
         toast.addToast({
           key: `UPLOAD_FILE_FAILED${Date.now()}`,
           type: 'error',
-          message: xhr.responseText.trim() === '' ? xhr.responseText.trim() : '上傳失敗',
+          message: safeJsonParse(xhr.responseText)?.message ?? '上傳失敗',
           during: 3000
         });
       }
@@ -128,11 +140,12 @@ function FileUpload({ type, hint }: Props) {
       <div className="modal" role="dialog">
         <div className="modal-box">
           <p className="py-4">上傳中</p>
-          <div className="flex justify-center">
-            <div className="radial-progress text-primary" style={{ '--value': progress }} role="progressbar">
-              {progress}
+          <div className="flex justify-center items-center">
+            <span>
+              { progress }
               %
-            </div>
+            </span>
+            <progress className="progress progress-primary w-56" value={progress} max="100"></progress>
           </div>
           <div className="modal-action">
             <label htmlFor="my_modal_6" className="btn" onClick={abort}>取消</label>

@@ -75,6 +75,17 @@ class GroupController {
       next({ error });
     }
   };
+
+  deleteGroup: Handler = async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      await this.groupService.deleteGroup(id);
+      res.send('');
+    }
+    catch (error) {
+      next({ error });
+    }
+  };
 }
 
 export default GroupController;

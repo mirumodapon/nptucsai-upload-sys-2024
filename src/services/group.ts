@@ -73,6 +73,10 @@ class GroupService {
       ]
     });
   }
+
+  deleteGroup(group_id: string) {
+    return Group.destroy({ where: { group_id } });
+  }
 }
 
 export default GroupService;

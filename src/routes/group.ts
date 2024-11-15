@@ -20,6 +20,7 @@ class GroupRoute {
     this.router.post('/', [], this.controller.createGroup);
     this.router.get('/', [], this.controller.listGroup);
     this.router.get('/files', [], this.controller.downloadFiles);
+    this.router.delete('/:id', [], this.controller.deleteGroup);
   }
 };
 

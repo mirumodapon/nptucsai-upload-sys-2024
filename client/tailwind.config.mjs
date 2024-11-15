@@ -11,7 +11,7 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: false
+    themes: ['light']
   },
   darkMode: ['class', '[data-theme="dark"]'],
   safelist: [

@@ -1,4 +1,3 @@
-import { createHash, randomBytes } from 'node:crypto';
 import { Handler } from 'express';
 import { Group, User } from '@/database';
 import passport from 'passport';
@@ -15,7 +14,7 @@ class AuthController {
         {
           clientID: GOOGLE_CLIENT_ID,
           clientSecret: GOOGLE_CLIENT_SECRET,
-          callbackURL: '/api/auth/google/callback',
+          callbackURL: 'https://file.nptucsai.org/api/auth/google/callback',
           scope: ['profile', 'email']
         },
         async (access, refresh, profile, done) => {
